@@ -17,8 +17,15 @@ sub do_update_books_to_give {
 	
 	my $user = sql (users => $_REQUEST {_id_user}, 'levels');
 	
-	$_REQUEST {_dt_to} = dt_add (today (), $user -> {level} -> {days});
+	sql ('books(COUNT(id))' => [[id_user => $user -> {id}]]) < $user -> {level} -> {amount} or die "#_id_user#:Число книг для этого читателя ограничено числом $user->{level}->{amount}, а столько он уже взял.";
 	
+	$_REQUEST {_dt_from} = today ();
+	$_REQUEST {_dt_to}   = dt_add (today (), $user -> {level} -> {days});
+	
+	my $data = sql (books => $_REQUEST {id});
+	
+	$_REQUEST {_cnt} = 1 + $data -> {cnt};
+
 	local $_REQUEST {type} = 'books';
 
 	do_update_DEFAULT ();

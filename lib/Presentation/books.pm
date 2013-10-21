@@ -65,11 +65,15 @@ sub draw_item_of_books {
 				name    => 'no',
 				size    => 80,
 			},
+			{
+				name    => 'dt',
+			},
 			[
 			{
 				name    => 'user.label',
 				label   => 'Êîìó âûäàíà',
 				type    => 'static',
+				href    => "/?type=users&id=$data->{id_user}",
 				off     => !$data -> {id_user},
 			},
 			{

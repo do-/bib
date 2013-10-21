@@ -139,14 +139,6 @@ sub draw_item_of_users {
 			top_toolbar => [{
 				keep_params => ['type', 'id'],
 			},
-				{
-					icon  => 'create',
-					label => '&Добавить',
-					href  => "?type=books&action=create&_id_title=$data->{id}",
-					off   => !$_USER -> {is_mgr},
-				},
-				
-				fake_select (),
 				
 			],
 			
@@ -171,6 +163,7 @@ sub draw_users {
 		draw_table (
 
 			[
+				'№',
 				'ФИО',
 			],
 
@@ -182,6 +175,7 @@ sub draw_users {
 					href => "/?type=users&id=$$i{id}",
 				},[
 	
+					$i -> {id},
 					$i -> {label},
 
 				])
@@ -205,6 +199,13 @@ sub draw_users {
 						label => '&Добавить',
 						href  => '?type=users&action=create',
 						off   => !$_USER -> {is_mgr},
+					},
+					{
+						type  => 'input_text',
+						label => '№',
+						size  => 5,
+						name  => 'id',
+						keep_params => [],
 					},
 					{
 						type  => 'input_text',

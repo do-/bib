@@ -62,7 +62,17 @@ sub do_update_books {
 	$_REQUEST {_no} or die "#_no#:Вы забыли ввести номер";
 	
 	vld_unique (books => {field => 'no'}) or die "#_no#:Этот номер уже зарегистрирован";
+
+	$_REQUEST {_dt} or die "#_dt#:Вы забыли ввести дату поступления";
 	
+	vld_date ('dt');
+	
+	$_REQUEST {_dt} le today () or die "#_dt#:Эта дата ещё не наступила";
+	
+	my $data = sql (books => $_REQUEST {id}, 'titles');
+
+	$_REQUEST {_dt} ge $data -> {title} -> {year} . '-01-01' or die "#_dt#:Книга не могла поступить в библиотеку ранее, чем была издана";
+
 	do_update_DEFAULT ();
 	
 	esc ();
@@ -75,28 +85,11 @@ sub get_item_of_books { # Экземпляры книг
 
 	my $data = sql (books => $_REQUEST {id}, 'titles', 'users');
 
+	$data -> {dt} ||= today ();
+
 	$data -> {no_del} ||= 1 if !$_USER -> {is_mgr};
 
 	$_REQUEST {__read_only} ||= !($_REQUEST {__edit} || $data -> {fake} > 0);
-
-#	add_vocabularies ($data,
-#		voc_foo => {order => "id", filter => "id=$$data{id_books}"}
-#	);
-
-#	$_REQUEST {first} += 0;
-#	
-#	$data -> {clones} = sql (books => [
-#		['label LIKE', substr ($data -> {label}, 0, ($_REQUEST {first} ||= 10)) . '%'],
-#	]);
-
-#	sql ($data, books_log => [
-#	
-#		[ id_books => $data -> {id} ],
-#		
-#		[ ORDER       => ['id DESC'] ],
-#		[ LIMIT       => 'start, -50 BY id'],
-#		
-#	], 'voc_something(*)', 'log(dt)', 'users');
 
 	return $data;
 

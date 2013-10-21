@@ -17,6 +17,8 @@ sub draw_item_of_books_to_give {
 				{type => 'books', name => $data -> {no}, id => $data -> {id}},
 			],
 			
+			label_ok => 'выдать (Ctrl-Enter)',
+			
 		},
 		
 		$data,

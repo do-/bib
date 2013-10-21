@@ -7,6 +7,13 @@ sub select_menu {
 		{
 			name  => 'users',
 			label => 'Люди',
+			items => [
+				{
+					name  => 'books_overdue',
+					label => 'Должники',
+					off   => !$_USER -> {is_mgr},
+				},		
+			],
 		},
 		
 		($_USER -> {id_user_client} ? {
@@ -17,6 +24,18 @@ sub select_menu {
 		{
 			name  => 'titles',
 			label => 'Книги',
+			items => [
+#				{
+#					name  => 'titles_boring',
+#					label => 'Неинтересные',
+#					off   => !$_USER -> {is_mgr},
+#				},
+				{
+					name  => 'books_mint',
+					label => 'Нечитанные',
+					off   => !$_USER -> {is_mgr},
+				},
+			],
 		},
 		{
 			name  => 'rubrics',

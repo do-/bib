@@ -35,7 +35,6 @@ sub draw_item_of_titles {
 				size    => 80,
 				max_len => 255,
 			},
-
 			{
 				name   => 'id_rubric',
 				label  => 'Рубрика',
@@ -43,6 +42,15 @@ sub draw_item_of_titles {
 				values => $data -> {rubrics},
 				empty  => '[Выберите рубрику]',
 				other  => '/?type=rubrics',
+			},
+			{
+				name    => 'publishing',
+				size    => 80,
+				max_len => 255,
+			},
+			{
+				name    => 'year',
+				size    => 4,
 			},
 
 		],
@@ -52,6 +60,28 @@ sub draw_item_of_titles {
 	.
 
 	draw_table (
+	
+		[
+			[
+				{
+					label   => '№',
+					rowspan => 2,
+				},
+				{
+					label   => 'Поступил',
+					rowspan => 2,
+				},
+				{
+					label   => 'Выдан',
+					colspan => 3,
+				},
+			],
+			[
+				'Кому',
+				'До каких пор',
+				'Телефон',
+			],
+		],
 
 		sub {
 		
@@ -68,8 +98,10 @@ sub draw_item_of_titles {
 						101
 					}
 				},
+				$i -> {dt},
 				$i -> {user} -> {label},
 				$i -> {dt_to},
+				$i -> {user} -> {phone},
 			]),
 
 		},
@@ -118,6 +150,8 @@ sub draw_titles {
 				'Наименование',
 				'Автор',
 				'Рубрика',
+				'Издательство',
+				'Год',
 				'Всего',
 				'Свободно',
 			],
@@ -133,6 +167,8 @@ sub draw_titles {
 					$i -> {label},
 					$i -> {author},
 					$i -> {rubric} -> {label},
+					$i -> {publishing},
+					$i -> {year},
 					{
 						label => $i -> {cnt},
 						picture => '###',
