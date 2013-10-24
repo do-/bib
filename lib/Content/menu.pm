@@ -25,11 +25,11 @@ sub select_menu {
 			name  => 'titles',
 			label => 'Книги',
 			items => [
-#				{
-#					name  => 'titles_boring',
-#					label => 'Неинтересные',
-#					off   => !$_USER -> {is_mgr},
-#				},
+				{
+					name  => 'titles_boring',
+					label => 'Неинтересные',
+					off   => !$_USER -> {is_mgr},
+				},
 				{
 					name  => 'books_mint',
 					label => 'Нечитанные',
