@@ -35,6 +35,11 @@ sub select_menu {
 					label => 'Нечитанные',
 					off   => !$_USER -> {is_mgr},
 				},
+				{
+					name  => 'books_decrepit',
+					label => 'Ветхие',
+					off   => !$_USER -> {is_mgr},
+				},
 			],
 		},
 		{
