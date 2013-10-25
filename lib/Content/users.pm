@@ -2,6 +2,18 @@
 
 ################################################################################
 
+sub do_create_users { # È ÷òî ıòî çà ïğîöåäóğà?
+
+	$_REQUEST {id} = sql_do_insert (users => {
+		id_level  => 1,
+	});
+
+}
+
+
+
+################################################################################
+
 sub do_unmark_users {
 
 	sql_do ('UPDATE users SET id_user_client = NULL WHERE id = ?', $_USER -> {id});
