@@ -43,9 +43,20 @@ sub select_menu {
 			],
 		},
 		{
-			name  => 'rubrics',
-			label => 'Рубрики',
-			off   => !$_USER -> {is_mgr},
+			name    => '_vocs',
+			label   => 'Справочники',
+			off     => !$_USER -> {is_mgr},
+			no_page => 1,
+			items => [
+				{
+					name  => 'rubrics',
+					label => 'Рубрики',				
+				},
+				{
+					name  => 'levels',
+					label => 'Уровни',
+				},
+			],
 		},
 
 	];
