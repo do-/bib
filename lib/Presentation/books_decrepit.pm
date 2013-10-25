@@ -46,6 +46,13 @@ sub draw_books_decrepit { #
 						keep_params => ['type', 'select'],
 					},
 
+					{
+						icon  => 'print',
+						label => 'Ms Excel',
+						href  => {xls => 1},
+						target => 1,
+					},
+
 #					{
 #						type  => 'input_text',
 #						label => 'Искать',
