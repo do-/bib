@@ -90,18 +90,22 @@ sub select_users { # Ëşäè
 	sql (
 	
 		add_vocabularies ({},
-#			users => {},
+			levels => {},
 		),
 		
 		users => [
 	
-#			'id_user',
+			'id_level',
+			'is_lib',
+			'is_mgr',
 			
 			['UPPER(label) LIKE %?%' => $i18n -> uc ($_REQUEST {q}) || undef],
 			
 			[ LIMIT => 'start, 50'],
 		
 		],
+		
+		'levels',
 					
 	);
 	
