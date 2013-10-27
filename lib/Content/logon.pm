@@ -77,6 +77,8 @@ EOR
 	if ($@) {
 	
 		warn "SOAP body:\n $xml\n\n $@\n";
+		
+		$r -> status (500);
 
 		out_html ({},
 		
